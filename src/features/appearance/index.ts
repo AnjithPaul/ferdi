@@ -120,6 +120,9 @@ function generateServiceRibbonWidthStyle(widthStr, iconSizeStr, vertical) {
 
   return vertical
     ? `
+    .sidebar {
+      height: ${width}px !important;
+    }
     .tab-item {
       width: ${width - 2}px !important;
       height: ${width - 5 + iconSize}px !important;
@@ -130,6 +133,18 @@ function generateServiceRibbonWidthStyle(widthStr, iconSizeStr, vertical) {
     }
     .sidebar__button {
       font-size: ${width / 3}px !important;
+    }
+    .app .app__content {
+      padding-top: ${width}px !important;
+    }
+    .workspaces-drawer {
+      margin-top: -${width}px !important;
+    }
+    .darwin .sidebar {
+      height: ${22 + width}px !important;
+    }
+    .darwin .sidebar .sidebar__button--workspaces.is-active {
+      height: ${width - 22}px !important;
     }
   `
     : `
