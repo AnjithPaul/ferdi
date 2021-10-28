@@ -114,19 +114,62 @@ function generateAccentStyle(accentColorStr) {
   `;
 }
 
-function generateServiceRibbonWidthStyle(widthStr, iconSizeStr, vertical) {
+function generateServiceRibbonWidthStyle(widthStr, iconSizeStr, vertical, isLabelEnabled) {
   const width = Number(widthStr);
   const iconSize = Number(iconSizeStr) - iconSizeBias;
+  let fontSize = 11;
+  let sidebarSizeBias = 0;
+  let tabItemSizeBias = 0;
+
+  switch(width){
+    case (35): 
+      fontSize = 9;
+      tabItemSizeBias = 30;
+      sidebarSizeBias = 26;
+      break;
+    case (45):
+        fontSize = 10;
+        tabItemSizeBias = 26;
+        sidebarSizeBias = 22;
+        break;
+    case (55):
+      fontSize = 11;
+      tabItemSizeBias = 18;
+      sidebarSizeBias = 15;
+      break;
+    case (80):
+      fontSize = 11;
+      tabItemSizeBias = 8;
+      sidebarSizeBias = 5;
+      break;
+    case (90):
+      fontSize = 12;
+      tabItemSizeBias = 5;
+      sidebarSizeBias = 3;
+      break;
+    case (100):
+      fontSize = 13;
+      tabItemSizeBias = 7;
+      sidebarSizeBias = 3;
+      break;
+  }
+
+  if(!isLabelEnabled){
+    sidebarSizeBias = 0;
+    tabItemSizeBias = 0;
+  }
 
   return vertical
     ? `
     .sidebar {
       height: ${width}px !important;
+      overflow: hidden !important;
     }
     .tab-item {
       width: ${width - 2}px !important;
-      height: ${width - 5 + iconSize}px !important;
+      height: ${width - 5 + iconSize +tabItemSizeBias}px !important;
       min-height: unset;
+      overflow: hidden !important;
     }
     .tab-item .tab-item__icon {
       width: ${width / 2 + iconSize}px !important;
@@ -135,16 +178,22 @@ function generateServiceRibbonWidthStyle(widthStr, iconSizeStr, vertical) {
       font-size: ${width / 3}px !important;
     }
     .app .app__content {
-      padding-top: ${width}px !important;
+      padding-top: ${width + 22 + sidebarSizeBias}px !important;
     }
     .workspaces-drawer {
       margin-top: -${width}px !important;
     }
     .darwin .sidebar {
-      height: ${22 + width}px !important;
+      height: ${22 + width + sidebarSizeBias}px !important;
     }
     .darwin .sidebar .sidebar__button--workspaces.is-active {
       height: ${width - 22}px !important;
+    }
+    .tab-item .tab-item__label{
+      font-size: ${fontSize}px !important;
+    }
+    .tab-item div{
+      overflow: hidden !important;
     }
   `
     : `
@@ -244,6 +293,7 @@ function generateStyle(settings) {
     showDragArea,
     useVerticalStyle,
     alwaysShowWorkspaces,
+    showServiceName,
   } = settings;
 
   if (
@@ -259,6 +309,7 @@ function generateStyle(settings) {
       serviceRibbonWidth,
       iconSize,
       useVerticalStyle,
+      showServiceName
     );
   }
   if (showDragArea) {
@@ -296,6 +347,7 @@ export default function initAppearance(stores) {
       settings.all.app.showDragArea,
       settings.all.app.useVerticalStyle,
       settings.all.app.alwaysShowWorkspaces,
+      settings.all.app.showServiceName,
     ],
     () => {
       updateStyle(settings.all.app);
