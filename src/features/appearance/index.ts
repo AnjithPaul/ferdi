@@ -152,6 +152,10 @@ function generateServiceRibbonWidthStyle(widthStr, iconSizeStr, vertical, isLabe
       tabItemSizeBias = 7;
       sidebarSizeBias = 3;
       break;
+    default:
+      fontSize = 11;
+      tabItemSizeBias = 18;
+      sidebarSizeBias = 15;
   }
 
   if(!isLabelEnabled){
