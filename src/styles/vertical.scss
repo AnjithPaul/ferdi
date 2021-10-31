@@ -1,6 +1,8 @@
 @import './config.scss';
 
 $sidebar-width: 75px;
+$sidebar-bias: 22px;
+$tabitem-bias: 30px;
 
 .sidebar {
   width: 100vw;
@@ -35,7 +37,7 @@ $sidebar-width: 75px;
         border-top-width: 4px;
         border-top-style: solid;
         overflow: hidden;
-        height: $sidebar-width+4;
+        height: $sidebar-width + 4;
       }
 
       &:not(.is-active) {
@@ -45,7 +47,7 @@ $sidebar-width: 75px;
       &.is-label-enabled{
         min-width: 70px;
         max-width: 140px;
-        height: $sidebar-width +10;
+        height: $sidebar-width + 10;
         width: max-content !important;
         overflow: hidden;
         padding-left: 4px;
@@ -67,7 +69,7 @@ $sidebar-width: 75px;
 }
 
 .app .app__content {
-  padding-top: $sidebar-width+22;
+  padding-top: $sidebar-width + $sidebar-bias;
 }
 
 .workspaces-drawer {
@@ -102,12 +104,12 @@ $sidebar-width: 75px;
 }
 
 .darwin .sidebar {
-  height: $sidebar-width + 22px;
+  height: $sidebar-width + $sidebar-bias;
 
   .sidebar__button--workspaces.is-active {
-    height: $sidebar-width - 22px;
+    height: $sidebar-width - $sidebar-bias;
   }
   .tab-item .is-label-enabled{
-    height: $sidebar-width +30px;
+    height: $sidebar-width + $tabitem-bias;
   }
 }
