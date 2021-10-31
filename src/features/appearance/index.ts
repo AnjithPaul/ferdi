@@ -118,49 +118,50 @@ function generateServiceRibbonWidthStyle(widthStr, iconSizeStr, vertical, isLabe
   const width = Number(widthStr);
   const iconSize = Number(iconSizeStr) - iconSizeBias;
   let fontSize = 11;
-  let sidebarSizeBias = 0;
-  let tabItemSizeBias = 0;
+  let tabItemHeightBias = -5;
+  let sidebarSizeBias = 22;
+  const tabItemWidthBias = 2;
 
   switch(width){
     case (35): 
       fontSize = 9;
-      tabItemSizeBias = 30;
-      sidebarSizeBias = 26;
+      tabItemHeightBias = 25;
+      sidebarSizeBias = 48;
       break;
     case (45):
         fontSize = 10;
-        tabItemSizeBias = 26;
-        sidebarSizeBias = 22;
+        tabItemHeightBias = 21;
+        sidebarSizeBias = 44;
         break;
     case (55):
       fontSize = 11;
-      tabItemSizeBias = 18;
-      sidebarSizeBias = 15;
+      tabItemHeightBias = 13;
+      sidebarSizeBias = 37;
       break;
     case (80):
       fontSize = 11;
-      tabItemSizeBias = 8;
-      sidebarSizeBias = 5;
+      tabItemHeightBias = 3;
+      sidebarSizeBias = 27;
       break;
     case (90):
       fontSize = 12;
-      tabItemSizeBias = 5;
-      sidebarSizeBias = 3;
+      tabItemHeightBias = 0;
+      sidebarSizeBias = 25;
       break;
     case (100):
       fontSize = 13;
-      tabItemSizeBias = 7;
-      sidebarSizeBias = 3;
+      tabItemHeightBias = 2;
+      sidebarSizeBias = 25;
       break;
     default:
       fontSize = 11;
-      tabItemSizeBias = 18;
-      sidebarSizeBias = 15;
+      tabItemHeightBias = 13;
+      sidebarSizeBias = 37;
   }
 
   if(!isLabelEnabled){
-    sidebarSizeBias = 0;
-    tabItemSizeBias = 0;
+    sidebarSizeBias = 22;
+    tabItemHeightBias = -5;
   }
 
   return vertical
@@ -170,8 +171,8 @@ function generateServiceRibbonWidthStyle(widthStr, iconSizeStr, vertical, isLabe
       overflow: hidden !important;
     }
     .tab-item {
-      width: ${width - 2}px !important;
-      height: ${width - 5 + iconSize + tabItemSizeBias}px !important;
+      width: ${width - tabItemWidthBias}px !important;
+      height: ${width + iconSize + tabItemHeightBias}px !important;
       min-height: unset;
       overflow: hidden !important;
     }
@@ -182,16 +183,16 @@ function generateServiceRibbonWidthStyle(widthStr, iconSizeStr, vertical, isLabe
       font-size: ${width / 3}px !important;
     }
     .app .app__content {
-      padding-top: ${width + 22 + sidebarSizeBias}px !important;
+      padding-top: ${width + sidebarSizeBias}px !important;
     }
     .workspaces-drawer {
       margin-top: -${width}px !important;
     }
     .darwin .sidebar {
-      height: ${22 + width + sidebarSizeBias}px !important;
+      height: ${width + sidebarSizeBias}px !important;
     }
     .darwin .sidebar .sidebar__button--workspaces.is-active {
-      height: ${width - 22}px !important;
+      height: ${width - sidebarSizeBias}px !important;
     }
     .tab-item .tab-item__label{
       font-size: ${fontSize}px !important;
